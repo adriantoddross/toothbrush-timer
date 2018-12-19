@@ -16,9 +16,9 @@ export default class SettingsScreen extends React.Component {
     this.handleTimer = this.handleTimer.bind(this);
   }
 
-  handleTimer(e) {
+  handleTimer(text) {
     this.setState({
-      minutes: e
+      minutes: text
     });
   }
 
@@ -55,7 +55,7 @@ class TimerInput extends React.Component {
         <TextInput
           style={styles.textInput}
           keyboardType='numeric'
-          onChangeText = {(e) => this.props.handleTimer(e)}
+          onChangeText = {(text) => this.props.handleTimer(text)}
           value={this.props.userInput}
           maxLength={9}  //setting limit of input
         />
