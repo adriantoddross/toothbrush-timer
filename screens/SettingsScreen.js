@@ -13,13 +13,61 @@ export default class SettingsScreen extends React.Component {
       seconds: '00',
       minutes: '0'
     };
+
+    this.secondsRemaining;
+
+    this.intervalHandle;
+
     this.handleTimer = this.handleTimer.bind(this);
+
+    // this method triggers the countdown
+
+    this.startCountDown = this.startCountDown.bind(this);
+
+    this.tick = this.tick.bind(this);
+
   }
 
   handleTimer(text) {
     this.setState({
       minutes: text
     });
+  }
+
+  tick() {
+    const min = Math.floor(this.secondsRemaining / 60);
+    const sec = this.secondsRemaining - (min * 60);
+
+    this.setState({
+      minutes: min,
+      seconds: sec
+    });
+
+    if (sec < 10) {
+      this.setState({
+        seconds: '0' + this.state.seconds
+      });
+    }
+
+    if (min < 10) {
+      this.setState({
+        value: '0' + min
+      });
+    }
+
+    if (min === 0 & sec === 0) {
+      clearInterval(this.intervalHandle);
+    }
+
+    this.secondsRemaining--;
+  }
+
+  startCountDown() {
+    this.intervalHandle = setInterval(this.tick, 1000);
+    
+    let time = this.state.minutes;
+
+    this.secondsRemaining = time * 60;
   }
 
   render() {
