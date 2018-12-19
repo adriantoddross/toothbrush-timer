@@ -4,18 +4,13 @@ import { Button } from 'react-native-elements';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Toothbrush Timer',
   };
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.layout}>
-          <View style={styles.apptitle}>
-            <Text>
-              Toothbrush Timer
-            </Text>
-          </View>
           <Button
             title='Start brushing'
           />
