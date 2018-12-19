@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default class HomeScreen extends React.Component {
@@ -11,6 +11,11 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.layout}>
+          <View style={styles.apptitle}>
+            <Text>
+              Toothbrush Timer
+            </Text>
+          </View>
           <Button
             title='Start brushing'
           />
