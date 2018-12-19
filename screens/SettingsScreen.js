@@ -15,15 +15,10 @@ export default class SettingsScreen extends React.Component {
     };
 
     this.secondsRemaining;
-
     this.intervalHandle;
-
     this.handleTimer = this.handleTimer.bind(this);
 
-    // this method triggers the countdown
-
-    this.startCountDown = this.startCountDown.bind(this);
-
+    this.startCountDown = this.startCountDown.bind(this);  // this method triggers the countdown
     this.tick = this.tick.bind(this);
 
   }
@@ -76,7 +71,7 @@ export default class SettingsScreen extends React.Component {
         <View style={styles.layout}>
           <TimerInput userInput={this.state.minutes} handleTimer={this.handleTimer}/>
           <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
-          <StartButton/>
+          <StartButton startCountDown={this.startCountDown}/>
         </View>
       </View>
     );
@@ -104,7 +99,7 @@ class TimerInput extends React.Component {
           style={styles.textInput}
           keyboardType='numeric'
           onChangeText = {(text) => this.props.handleTimer(text)}
-          value={this.props.userInput}
+          value={this.props.userInput.toString()}
           maxLength={9}  //setting limit of input
         />
       </View>
@@ -118,6 +113,7 @@ class StartButton extends React.Component {
       <View>
         <Button
           title="Start"
+          onPress={this.props.startCountDown}
         />
       </View>
     );
