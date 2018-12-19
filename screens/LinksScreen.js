@@ -1,6 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import {View, Text, StyleSheet } from 'react-native';
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
@@ -9,11 +8,13 @@ export default class LinksScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
-      </ScrollView>
+      <View style={styles.container}>
+        <View>
+          <Text>
+            Thanks for using Toothbrush Time! After pressing "Start brushing" and starting the timer, it will run for two minutes total, vibrating and signaling you every 30 seconds to brush the opposite side of your mouth. Don't forget to floss at least once a day, and always brush your teeth before bed!
+          </Text>
+        </View>
+      </View>
     );
   }
 }
