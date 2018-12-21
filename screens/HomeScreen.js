@@ -13,9 +13,11 @@ export default class HomeScreen extends React.Component {
         <View style={styles.layout}>
           <Button
             title='Start brushing'
+            onPress={() => this.props.navigation.navigate('Brush')}            
           />
           <Button
             title='About'
+            onPress={() => this.props.navigation.navigate('About')}
           />
         </View>
       </View>
