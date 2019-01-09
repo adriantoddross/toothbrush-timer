@@ -12,7 +12,8 @@ export default class SettingsScreen extends React.Component {
     super(props);
     this.state = {
       seconds: '00',
-      minutes: '0'
+      minutes: '0',
+      quadrant: 1
     };
 
     this.secondsRemaining;
@@ -36,7 +37,7 @@ export default class SettingsScreen extends React.Component {
 
     this.setState({
       minutes: min,
-      seconds: sec
+      seconds: sec,
     });
 
     if (sec < 10) {
@@ -53,6 +54,22 @@ export default class SettingsScreen extends React.Component {
 
     if (min === 0 & sec === 0) {
       clearInterval(this.intervalHandle);
+      
+      this.setState({
+        quadrant: this.state.quadrant + 1
+      });
+
+      if (this.state.quadrant < 4) {
+        this.startCountDown();
+      } else if (this.state.quadrant >= 4) {
+        clearInterval(this.intervalHandle);
+        this.secondsRemaining = 0;
+
+        this.setState({
+          quadrant: 1
+        });
+      }
+
     }
 
     this.secondsRemaining--;
@@ -60,17 +77,15 @@ export default class SettingsScreen extends React.Component {
 
   startCountDown() {
     this.intervalHandle = setInterval(this.tick, 1000);
-    
-    let time = this.state.minutes;
-
-    this.secondsRemaining = time * 60;
+    this.secondsRemaining = 5;
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.layout}>
-          <TimerInput userInput={this.state.minutes} handleTimer={this.handleTimer}/>
+          {/* <TimerInput userInput={this.state.minutes} handleTimer={this.handleTimer}/> */}
+          <Text>quadrant: {this.state.quadrant}</Text>
           <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
           <StartButton startCountDown={this.startCountDown}/>
         </View>
