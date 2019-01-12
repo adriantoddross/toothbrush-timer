@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import {View, Text, TextInput, StyleSheet } from 'react-native';
+import {View, Text, TextInput, StyleSheet, Vibration } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default class SettingsScreen extends React.Component {
@@ -11,6 +11,8 @@ export default class SettingsScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      finished: false,
+      message: 'Ready to brush?',
       seconds: '00',
       minutes: '0',
       quadrant: 1
@@ -22,7 +24,6 @@ export default class SettingsScreen extends React.Component {
 
     this.startCountDown = this.startCountDown.bind(this);  // this method triggers the countdown
     this.tick = this.tick.bind(this);
-
   }
 
   handleTimer(text) {
@@ -59,33 +60,56 @@ export default class SettingsScreen extends React.Component {
         quadrant: this.state.quadrant + 1
       });
 
-      if (this.state.quadrant < 4) {
+      if (this.state.quadrant < 5) {
         this.startCountDown();
-      } else if (this.state.quadrant >= 4) {
+
+        this.setState({
+          message: 'Switch sides!',
+        });
+
+        setTimeout(() => {
+          this.setState({message: ''});
+        }, 2000);
+
+      } else if (this.state.quadrant > 4) {
         clearInterval(this.intervalHandle);
         this.secondsRemaining = 0;
 
         this.setState({
+          finished: true,
+          message: 'Done! Good job.',
           quadrant: 1
         });
+
+        Vibration.vibrate();
+
+        setTimeout(() => {
+          this.setState({message: 'Now would be a great time to floss!'});
+          Vibration.cancel();
+        }, 2000);
+
       }
-
     }
-
     this.secondsRemaining--;
   }
 
   startCountDown() {
     this.intervalHandle = setInterval(this.tick, 1000);
     this.secondsRemaining = 5;
+
+    this.setState({
+      message: '',
+      finished: false
+    });
   }
 
   render() {
+
     return (
       <View style={styles.container}>
         <View style={styles.layout}>
-          {/* <TimerInput userInput={this.state.minutes} handleTimer={this.handleTimer}/> */}
           <Text>quadrant: {this.state.quadrant}</Text>
+          <Text>{this.state.message}</Text>
           <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
           <StartButton startCountDown={this.startCountDown}/>
         </View>
