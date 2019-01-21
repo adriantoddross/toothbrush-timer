@@ -12,6 +12,7 @@ export default class SettingsScreen extends React.Component {
     super(props);
     this.state = {
       finished: false,
+      active: false,
       message: 'Ready to brush?',
       seconds: '00',
       minutes: '0',
@@ -84,7 +85,10 @@ export default class SettingsScreen extends React.Component {
         Vibration.vibrate();
 
         setTimeout(() => {
-          this.setState({message: 'Now would be a great time to floss!'});
+          this.setState({
+            message: 'Now would be a great time to floss!',
+            active: false
+          });
           Vibration.cancel();
         }, 2000);
 
@@ -99,7 +103,8 @@ export default class SettingsScreen extends React.Component {
 
     this.setState({
       message: '',
-      finished: false
+      finished: false,
+      active: true
     });
   }
 
@@ -108,10 +113,9 @@ export default class SettingsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.layout}>
-          <Text>quadrant: {this.state.quadrant}</Text>
-          <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
           <Text>{this.state.message}</Text>
-          <StartButton startCountDown={this.startCountDown}/>
+          <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
+          {this.state.active ? null : <StartButton startCountDown={this.startCountDown}/>}
         </View>
       </View>
     );
