@@ -109,8 +109,8 @@ export default class SettingsScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.layout}>
           <Text>quadrant: {this.state.quadrant}</Text>
-          <Text>{this.state.message}</Text>
           <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
+          <Text>{this.state.message}</Text>
           <StartButton startCountDown={this.startCountDown}/>
         </View>
       </View>
