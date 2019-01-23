@@ -86,7 +86,7 @@ export default class SettingsScreen extends React.Component {
 
         setTimeout(() => {
           this.setState({
-            message: 'Now would be a great time to floss!',
+            message: 'Don\'t forget to floss!',
             active: false
           });
           Vibration.cancel();
@@ -188,7 +188,8 @@ const styles = StyleSheet.create({
   message: {
     letterSpacing: 1.5,
     fontSize: 15,
-    textTransform: 'uppercase'
+    textAlign: 'center',
+    textTransform: 'uppercase',
   },
   countdown: {
     fontSize: 90,
