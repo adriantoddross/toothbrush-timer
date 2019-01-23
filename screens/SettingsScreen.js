@@ -113,8 +113,13 @@ export default class SettingsScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.timer}>
-          <Text>{this.state.message}</Text>
-          <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
+          <Text 
+            style={styles.message}>
+            {this.state.message}
+          </Text>
+          <Timer 
+            minutes={this.state.minutes} 
+            seconds={this.state.seconds}/>
         </View>
         <View>
           {this.state.active ? null : 
@@ -131,7 +136,7 @@ class Timer extends React.Component {
   render() {
     return(
       <View>
-        <Text>
+        <Text style={styles.countdown}>
           {this.props.minutes}:{this.props.seconds}
         </Text>
       </View>
@@ -179,6 +184,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  message: {
+    letterSpacing: 1.5,
+    fontSize: 15,
+    textTransform: 'uppercase'
+  },
+  countdown: {
+    fontSize: 90,
   },
   startbutton: {
     alignSelf: 'flex-end'
