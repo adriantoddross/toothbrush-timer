@@ -2,6 +2,7 @@
 import React from 'react';
 import {View, Text, TextInput, StyleSheet, Vibration } from 'react-native';
 import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class SettingsScreen extends React.Component {
   // static navigationOptions = {
@@ -165,7 +166,19 @@ class StartButton extends React.Component {
     return(
       <View>
         <Button
-          title="Start"
+          reverse
+          raised
+          title=""
+          buttonStyle = {{
+            backgroundColor: 'transparent',
+          }}
+          icon={
+            <Icon
+              name='play'
+              size={50}
+              color='black'
+            />
+          }
           onPress={this.props.startCountDown}
         />
       </View>
@@ -175,12 +188,11 @@ class StartButton extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'rgba(0,0,0,0.05)',
     flex: 1,
   },
   timer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    
-    flex: 1,
+    flex: 0.9,
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -192,9 +204,10 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   countdown: {
-    fontSize: 90,
+    fontSize: 75,
   },
   startbutton: {
-    alignSelf: 'flex-end'
+    flex: 0.1,
+    alignSelf: 'flex-end',
   }
 });
