@@ -112,10 +112,14 @@ export default class SettingsScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.layout}>
+        <View style={styles.timer}>
           <Text>{this.state.message}</Text>
           <Timer minutes={this.state.minutes} seconds={this.state.seconds}/>
-          {this.state.active ? null : <StartButton startCountDown={this.startCountDown}/>}
+        </View>
+        <View>
+          {this.state.active ? null : 
+            <StartButton style={styles.startbutton} startCountDown={this.startCountDown}/>}
+
         </View>
       </View>
     );
@@ -168,11 +172,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  layout: {
-    alignItems: 'center',
+  timer: {
     backgroundColor: 'rgba(0,0,0,0.05)',
+    
     flex: 1,
+    alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  startbutton: {
+    alignSelf: 'flex-end'
   }
 });
